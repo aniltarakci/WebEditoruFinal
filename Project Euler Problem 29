@@ -1,0 +1,78 @@
+var buyukNumara = {};
+
+buyukNumara.createFromNumber = function(numara){
+    var buyukNo = [numara];
+    buyukNumara.rebalanceDigitArray(buyukNo);
+    return buyukNo;
+};
+buyukNumara.digitArrayMultiply = function(s1, s2) {
+    var hane = [];
+    for (var i = 0; i < s1.length; i++) {
+        ss1 = s1[i];
+        for (var j = 0; j < s2.length; j++) {
+            ss2 = s2[j];
+            var carpim = ss1 * ss2;
+            var carpimI = i + j;
+            
+            hane[carpimI] = (hane[carpimI] || 0) + carpim;
+            buyukNumara.rebalanceDigitArray(hane, carpimI);
+        }
+    }
+    return hane;
+};
+buyukNumara.digitArrayAdd = function(s1, s2) {
+    var toplamHane = [];
+    var uzunluk = s1.length > s2.length ? s1.length : s2.length;
+    
+    for(var i = 0; i < length; i++){
+        toplamHane[i] = (s1[i] || 0) + (s2[i] || 0) + (toplamHane[i] || 0);
+        buyukNumara.rebalanceDigitArray(toplamHane, i);
+    }
+    return toplamHane;
+}; 
+buyukNumara.equals = function(noo1, noo2){
+    if(!noo1 || !noo2 || (noo1.length != noo2.length)){
+        return false;
+    }
+    
+    for(var i = 0; i < noo1.length; i++){
+        if(noo1[i] != noo2[i]){
+            return false;
+        }
+    }
+    return true;
+};
+
+buyukNumara.rebalanceDigitArray = function(abc, index){
+    index = index || 0;
+    var dig = abc[index];
+    while(dig > 9){
+        abc[index] = dig % 10;
+        index++;
+        abc[index] = dig = (abc[index] || 0) + ((dig - dig % 10) / 10);
+    }
+};
+var anil = function(max) {
+    var results = [];
+    for(var a = 2; a <= max; a++){
+        for(var b = 2; b <= max; b++){
+            var num = buyukNumara.createFromNumber(a);
+            var result = buyukNumara.createFromNumber(a);
+            
+            for(var i = 1; i < b; i++){
+                result = buyukNumara.digitArrayMultiply(result, num);
+            }
+            results.push(result);
+        }
+    }
+    results.sort();
+    
+    for(var i = 0, result; (result = results[i]); i++){
+        while(buyukNumara.equals(result, results[i+1])){
+            results.splice(i+1, 1);
+        }
+    }
+    return results.length;
+};
+console.log(anil(5));
+console.log(anil(100));
