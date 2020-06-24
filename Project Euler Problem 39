@@ -1,0 +1,27 @@
+var cevreKomb = [];
+
+for(a = 1; a < 999; a++){
+    for(b = a; b < (999-a); b++){
+        var c = Math.sqrt(a*a + b*b);
+        if(c%1 == 0){
+            var cevre = a + b + c;
+            if(cevre <= 1000){
+                cevreKomb[cevre] = (cevreKomb[cevre] || 0) + 1;
+            }
+        }
+    }
+}
+
+var maxKomb = 0;
+var maxKombCevre = 0;
+
+for(var cevre = 0; cevre <= 1000; cevre++){
+    var kombinasyon = cevreKomb[cevre];
+    if(kombinasyon && kombinasyon > maxKomb){
+        console.log('cevre: ' + cevre + '  kombinasyon: ' + kombinasyon);
+        maxKomb = kombinasyon;
+        maxKombCevre = cevre;
+    }        
+}
+        
+console.log(maxKombCevre);
