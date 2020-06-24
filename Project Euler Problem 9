@@ -1,0 +1,17 @@
+var a = 1;
+var b = 2;
+var c = Math.sqrt(a*a + b*b);
+var toplam = a+b+c;
+while(toplam != 1000){
+    if(toplam > 1000){
+        a++;
+        b = a+1;
+    } else {
+        b++;
+    }
+    c = Math.sqrt(a*a + b*b);
+    toplam = a + b + c;
+}
+
+console.log('a:' + a + '  b:' + b + '  c:' + c);
+console.log(a*b*c); 
