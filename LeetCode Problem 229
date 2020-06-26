@@ -1,0 +1,17 @@
+var majorityElement = function(a) {
+  const aLen = a.length;
+  const len = parseInt(aLen/3);
+  const dict = new Map();
+  const sonuc = new Set();
+  for (let i = 0; i < a.length; i++) {
+    const b = a[i];
+    if(!dict.get(b)) {
+      dict.set(b, 0);
+    }
+    dict.set(b, dict.get(b) + 1);
+    if(dict.get(b) > len && !sonuc.has(b)) {
+      sonuc.add(b);
+    }
+  }
+  return [...sonuc];
+};
