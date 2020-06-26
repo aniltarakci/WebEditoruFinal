@@ -1,0 +1,51 @@
+const dartCikislari = (x) => {
+  ss = [];
+  ds = [];
+  ts = [];
+  for (i = 1; i <= 20; i++) {
+    ss.push(i);     
+    ds.push(i*2);                       
+    ts.push(i*3);                   
+  }
+  ss.push(25);                         
+  ds.push(50);                         
+
+  miktar = 0;                                
+  for (i = 0; i < ds.length; i++) {
+    if (ds[i] < x) {miktar++}
+  }
+ 
+  i = 0;
+  sas = ss.concat(ds.concat(ts))          
+  while (i < sas.length) {
+    j = 0;
+    while (j < ds.length) {
+      if (sas[i] + ds[j] < x) {miktar += 1}
+      j += 1;
+    }
+    i += 1;
+  }
+
+  das = [];
+  i = 0;
+  while (i < sas.length) {
+    j = i;
+    while (j < sas.length) {
+      das.push([sas[i], sas[j]]);       
+      j += 1;
+    }
+    i += 1;
+  }
+
+  i = 0
+  while (i < das.length) {
+    j = 0;
+    while (j < ds.length) {
+      if (das[i][0] + das[i][1] + ds[j] < x) {miktar += 1}
+      j += 1;
+    }
+    i += 1;
+  }
+  return miktar;
+}
+"Bir oyuncunun " + X + " den az bir skorla çıkış yapması için " + dartCikislari(X = 100) + " farklı yolu vardır." 
